@@ -2,6 +2,7 @@
 # Guess the missing word in a song lyric!
 # By Apie
 # 2024-04-16
+import re
 from pathlib import Path
 from random import choice, shuffle, randint
 from sys import argv
@@ -37,7 +38,8 @@ for paragraph in paragraphs:
             # get last word from last sentence of paragraph
             words = line.split()
             last_word = words[-1]
-            words[-1] = '____'
+            # Replace letters with underscores.
+            words[-1] = re.sub(r'[a-zA-Z]', '_', words[-1])
             line = ' '.join(words)
         print(line)
         if last_word:
