@@ -56,7 +56,6 @@ for paragraph in paragraphs:
             while choice < 1 or choice > len(guess_words):
                 choice = int(input('Guess! >>>') or 0)
             guess = guess_words[choice - 1]
-            print('You guessed:', choice)
             print('You guessed:', guess)
             if guess == last_word:
                 print('CORRECT!')
