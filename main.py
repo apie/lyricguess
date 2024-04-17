@@ -4,6 +4,7 @@
 # 2024-04-16
 from pathlib import Path
 from random import choice, shuffle, randint
+from sys import argv
 
 print('Can you guess the missing words in this song?')
 print('-' * 80)
@@ -13,6 +14,8 @@ wrongly_answered = 0
 
 lyric_files = list(Path('lyrics').glob('**/*.txt'))
 # print(f"{len(lyric_files)=}")
+if len(argv) > 1:
+    lyric_files = list(filter(lambda fn: ' '.join(argv[1:]) in ' '.join(fn.parts[1:]).lower(), lyric_files))
 lyric_filename = choice(lyric_files)
 # print(lyric_filename.name)
 with open(lyric_filename, 'r') as f:
