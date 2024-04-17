@@ -45,9 +45,11 @@ for paragraph in paragraphs:
         if last_word:
             print()
             new_guess_word = last_word
-            while new_guess_word == last_word:
+            i = 0
+            while new_guess_word == last_word and i < 10:
                 random_paragraph = randint(0, len(paragraphs) - 1)
                 new_guess_word = paragraphs[random_paragraph][-1].split()[-1]
+                i += 1
             guess_words = [last_word, new_guess_word]
             shuffle(guess_words)
             for i, guess_word in enumerate(guess_words, 1):
