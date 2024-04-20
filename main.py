@@ -62,7 +62,10 @@ for paragraph in paragraphs:
                print(f"{i}. {guess_word}")
             choice = 0
             while choice < 1 or choice > len(guess_words):
-                choice = int(input('Guess! >>>') or 0)
+                try:
+                    choice = int(input('Guess! >>>') or 0)
+                except ValueError:
+                    pass
             guess = guess_words[choice - 1]
             print('You guessed:', guess)
             if guess == last_word:
