@@ -38,8 +38,11 @@ for paragraph in paragraphs:
             # get last word from last sentence of paragraph
             words = line.split()
             last_word = words[-1]
-            # Replace letters with underscores.
-            words[-1] = re.sub(r'[a-zA-Z]', '_', words[-1])
+            # strips non word characters like dots
+            last_word = re.findall(r'\w+', last_word)[0]
+
+            # Replace letters with fixed length underscores.
+            words[-1] = words[-1].replace(last_word, '____')
             line = ' '.join(words)
         print(line)
         if last_word:
@@ -48,7 +51,10 @@ for paragraph in paragraphs:
             i = 0
             while new_guess_word == last_word and i < 10:
                 random_paragraph = randint(0, len(paragraphs) - 1)
-                new_guess_word = paragraphs[random_paragraph][-1].split()[-1]
+                new_guess_word = re.findall(
+                    r'\w+',
+                    paragraphs[random_paragraph][-1].split()[-1],
+                )[0]
                 i += 1
             guess_words = [last_word, new_guess_word]
             shuffle(guess_words)
